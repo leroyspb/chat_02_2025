@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const sendMessageButton = document.querySelector('[name=send_message_button]');
 
     const username = "User" + Math.floor(Math.random() * 1000); // Генерируем временное имя пользователя
-    const roomName = "test"; // Название комнаты, можно менять динамически
+    const chat_id = "123"; // Название комнаты, можно менять динамически
 
-    let socket = new WebSocket(`ws://localhost:8000/ws/chat/${roomName}/`);
+    let socket = new WebSocket(`ws://localhost:8000/ws/chat/${chat_id}/`);
 
     // Соединение установлено
     socket.onopen = function () {
@@ -28,6 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
     socket.onclose = function () {
         console.log("WebSocket соединение закрыто");
     };
+
+    // socket.onclose = (event) => {
+    //     console.log('WebSocket соединение закрыто. Код:', event.code, 'Причина:', event.reason);
+    // };
 
     // Кнопка отправки сообщения
     sendMessageButton.onclick = function () {

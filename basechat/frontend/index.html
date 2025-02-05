@@ -10,8 +10,8 @@
     <button onclick="sendMessage()">Отправить</button>
 
     <script>
-        let chatId = 1;  // ID чата
-        let socket = new WebSocket(`ws://localhost:8000/ws/chat/${chatId}/`);
+        let chat_id = 1;  // ID чата
+        let socket = new WebSocket(`ws://localhost:8000/ws/chat/${chat_id}/`);
 
         socket.onmessage = function(event) {
             let data = JSON.parse(event.data);

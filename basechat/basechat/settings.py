@@ -71,15 +71,20 @@ TEMPLATES = [
         },
     },
 ]
-# WSGI_APPLICATION = 'basechat.wsgi.application'
+WSGI_APPLICATION = 'basechat.wsgi.application'
 ASGI_APPLICATION = "basechat.asgi.application"
 
 # Каналы для WebSocket
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
-    }
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6380)],  # Измените порт здесь
+        },
+    },
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Настройки для загрузки аватаров
 MEDIA_URL = "/media/"

@@ -15,5 +15,5 @@ class MessageViewSet(viewsets.ModelViewSet):
     serializer_class = MessageSerializer
 
 
-def chat_room(request):
+def index(request):
     return render(request, 'chat/chat.html')
