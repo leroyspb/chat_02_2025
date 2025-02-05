@@ -31,12 +31,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'channels',
+    'chat',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -66,9 +71,19 @@ TEMPLATES = [
         },
     },
 ]
+# WSGI_APPLICATION = 'basechat.wsgi.application'
+ASGI_APPLICATION = "basechat.asgi.application"
 
-WSGI_APPLICATION = 'basechat.wsgi.application'
+# Каналы для WebSocket
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    }
+}
 
+# Настройки для загрузки аватаров
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

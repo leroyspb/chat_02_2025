@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Чат</title>
+</head>
+<body>
+    <div id="chat"></div>
+    <input type="text" id="messageInput">
+    <button onclick="sendMessage()">Отправить</button>
+
+    <script>
+        let chatId = 1;  // ID чата
+        let socket = new WebSocket(`ws://localhost:8000/ws/chat/${chatId}/`);
+
+        socket.onmessage = function(event) {
+            let data = JSON.parse(event.data);
+            let div = document.createElement("div");
+            div.textContent = `${data.sender}: ${data.message}`;
+            document.getElementById("chat").appendChild(div);
+        };
+
+        function sendMessage() {
+            let message = document.getElementById("messageInput").value;
+            socket.send(JSON.stringify({message: message}));
+        }
+    </script>
+</body>
+</html>
